@@ -1,0 +1,26 @@
+# C++ build artifacts
+build/
+cpp/build/
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Datasets & checkpoints
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+checkpoints/
+outputs/
+.tools/
+.pytest_cache/
+.pytest_tmp/

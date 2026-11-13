@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="660" viewBox="0 0 960 660">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 18px; font-weight: bold; fill: #0f172a; }
+      .sec-title { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 14px; font-weight: bold; fill: #1e3a8a; }
+      .box-title { font-family: "Microsoft YaHei", "SimHei", sans-serif; font-size: 13px; font-weight: bold; fill: #0f172a; }
+      .box-sub { font-family: "Microsoft YaHei", "SimSun", sans-serif; font-size: 11.5px; fill: #334155; }
+      .outer-frame { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 6,4; rx: 8; }
+      .node-blue { fill: #eff6ff; stroke: #2563eb; stroke-width: 1.6; rx: 6; }
+      .node-indigo { fill: #eef2ff; stroke: #4f46e5; stroke-width: 1.6; rx: 6; }
+      .node-teal { fill: #f0fdfa; stroke: #0d9488; stroke-width: 1.6; rx: 6; }
+      .node-amber { fill: #fffbeb; stroke: #d97706; stroke-width: 1.6; rx: 6; }
+      .line { stroke: #334155; stroke-width: 1.8; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="960" height="660" fill="#ffffff"/>
+  <text x="480" y="32" text-anchor="middle" class="title">《融合历史统计特征的知识追踪方法研究》总体技术路线图</text>
+
+  <!-- Step 1: Data Layer -->
+  <rect x="180" y="52" width="600" height="58" class="node-blue"/>
+  <text x="480" y="76" text-anchor="middle" class="box-title">1. 公开教育交互数据集预处理与防穿越切分</text>
+  <text x="480" y="96" text-anchor="middle" class="box-sub">ASSISTments2009 / ASSISTments2017 / EdNet-KT1 · 按学习者划分训练/验证/测试集</text>
+
+  <!-- Arrows from Step 1 to Dual Streams -->
+  <path d="M 350 110 L 350 132 L 245 132 L 245 154" class="line"/>
+  <path d="M 610 110 L 610 132 L 715 132 L 715 154" class="line"/>
+
+  <!-- Left Frame: Explicit Multi-scale Statistical Feature Stream -->
+  <rect x="40" y="155" width="410" height="235" class="outer-frame"/>
+  <text x="245" y="178" text-anchor="middle" class="sec-title">2A. 防数据泄露三层十维历史统计特征流 (C++17 引擎)</text>
+
+  <rect x="65" y="192" width="360" height="48" class="node-teal"/>
+  <text x="245" y="212" text-anchor="middle" class="box-title">全局静态先验层 (仅训练集贝叶斯平滑)</text>
+  <text x="245" y="230" text-anchor="middle" class="box-sub">题目平滑正确率(难度先验) · 知识点平滑通过率 · 平均耗时</text>
+
+  <rect x="65" y="250" width="360" height="48" class="node-teal"/>
+  <text x="245" y="270" text-anchor="middle" class="box-title">个体长期因果累积层 (0..t-1 在线递推)</text>
+  <text x="245" y="288" text-anchor="middle" class="box-sub">学生全局正确率 · 总作答数对数 · 目标概念掌握率与练习次数</text>
+
+  <rect x="65" y="308" width="360" height="66" class="node-teal"/>
+  <text x="245" y="328" text-anchor="middle" class="box-title">短期窗口与遗忘状态层 (O(1) 环形缓冲区)</text>
+  <text x="245" y="346" text-anchor="middle" class="box-sub">近 K 题滑动窗口正确率 · 连对/连错连击指标 (Streak)</text>
+  <text x="245" y="363" text-anchor="middle" class="box-sub">同知识点遗忘时间差 ln(1+Δt) · 上一题相对耗时偏差</text>
+
+  <!-- Right Frame: Deep Sequence Stream -->
+  <rect x="510" y="155" width="410" height="235" class="outer-frame"/>
+  <text x="715" y="178" text-anchor="middle" class="sec-title">2B. 深度因果自注意力序列编码流 (PyTorch)</text>
+
+  <rect x="535" y="198" width="360" height="58" class="node-indigo"/>
+  <text x="715" y="222" text-anchor="middle" class="box-title">离散交互序列右移与多维嵌入</text>
+  <text x="715" y="242" text-anchor="middle" class="box-sub">历史题目 ID + 知识点 ID + 作答正误嵌入 + 位置编码</text>
+
+  <path d="M 715 256 L 715 288" class="line"/>
+
+  <rect x="535" y="290" width="360" height="76" class="node-indigo"/>
+  <text x="715" y="318" text-anchor="middle" class="box-title">因果上三角掩码 Transformer 编码器</text>
+  <text x="715" y="338" text-anchor="middle" class="box-sub">多头自注意力捕获跨知识点长程依赖关系</text>
+  <text x="715" y="355" text-anchor="middle" class="box-sub">输出高维序列上下文隐状态 h_t</text>
+
+  <!-- Stat Encoder & Convergence to Fusion -->
+  <path d="M 245 390 L 245 415" class="line"/>
+  <rect x="75" y="416" width="340" height="46" class="node-teal"/>
+  <text x="245" y="436" text-anchor="middle" class="box-title">连续统计特征编码器 (LayerNorm + 残差 MLP)</text>
+  <text x="245" y="452" text-anchor="middle" class="box-sub">映射为同维度稠密统计表征 e_stat</text>
+
+  <path d="M 245 462 L 245 485 L 400 485 L 400 502" class="line"/>
+  <path d="M 715 390 L 715 485 L 560 485 L 560 502" class="line"/>
+
+  <!-- Step 3: Adaptive Gating & Prediction -->
+  <rect x="170" y="504" width="620" height="58" class="node-amber"/>
+  <text x="480" y="527" text-anchor="middle" class="box-title">3. 双流自适应门控融合网络 (HSF-KT) 与 IRT 难度校准预测</text>
+  <text x="480" y="547" text-anchor="middle" class="box-sub">z_t = g_t ⊙ h_t + (1 - g_t) ⊙ e_stat · 动态平衡冷启动统计先验与长序列个性化隐状态</text>
+
+  <!-- Step 4: Evaluation & C++ Optimization -->
+  <path d="M 340 562 L 340 586" class="line"/>
+  <path d="M 620 562 L 620 586" class="line"/>
+
+  <rect x="65" y="588" width="405" height="54" class="node-blue"/>
+  <text x="267" y="610" text-anchor="middle" class="box-title">4A. 多维学术实验评估与可解释性分析</text>
+  <text x="267" y="629" text-anchor="middle" class="box-sub">主实验(AUC/ACC/RMSE) · 消融实验 · 冷启动分桶 · 门控热力图</text>
+
+  <rect x="490" y="588" width="405" height="54" class="node-blue"/>
+  <text x="692" y="610" text-anchor="middle" class="box-title">4B. C++17 底层算子与在线推理加速评测</text>
+  <text x="692" y="629" text-anchor="middle" class="box-sub">OpenMP 批量提取加速比压测 · 纯 C++ 微秒级在线推理验证</text>
+</svg>

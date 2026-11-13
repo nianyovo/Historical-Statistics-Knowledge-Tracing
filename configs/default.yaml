@@ -1,0 +1,46 @@
+data:
+  dataset: synthetic
+  path: data/raw/skill_builder_data.csv
+  questions_path: data/raw/EdNet/contents/questions.csv
+  split_seed: 42
+  synthetic_seed: 1729
+  train_ratio: 0.7
+  val_ratio: 0.1
+  min_interactions: 5
+  max_seq_len: 200
+  chunk_protocol: window_aligned
+  oof_folds: 5
+  synthetic_students: 1200
+  synthetic_min_length: 50
+  synthetic_max_length: 350
+  synthetic_items: 500
+  synthetic_concepts: 40
+stat:
+  window_size: 5
+  prior_alpha: 10.0
+  user_alpha: 2.0
+  has_real_timestamp: true
+  has_real_resp_time: true
+model:
+  hidden_dim: 64
+  num_heads: 4
+  num_layers: 2
+  dropout: 0.2
+train:
+  seeds: [42, 2025, 2026]
+  epochs: 30
+  patience: 5
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  device: auto
+  cpu_threads: 4
+experiment:
+  output_dir: outputs/formal
+  engine: auto
+  cpp_library: null
+  feature_threads: 4
+  benchmark_sizes: [50000, 200000, 1000000]
+  benchmark_threads: [1, 2, 4, 8]
+  benchmark_repeats: 3

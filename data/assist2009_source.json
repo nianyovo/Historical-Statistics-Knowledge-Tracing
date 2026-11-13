@@ -1,0 +1,12 @@
+{
+  "dataset": "ASSISTments2009 skill-builder corrected release",
+  "official_page": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
+  "download_url": "https://drive.usercontent.google.com/download?id=1NNXHFRxcArrU0ZJSb9BIL56vmUt5FhlE&export=download&confirm=t",
+  "download_date_Asia_Shanghai": "2026-11-12",
+  "local_path": "data/raw/skill_builder_data_corrected.csv",
+  "bytes": 64412812,
+  "sha256": "162ef8d2d28bcbfea6591a282994062bd8d5eaa00636544292a0d268dca6e5da",
+  "decoding": "latin-1; the released file contains non-UTF8 bytes; identifier columns are ASCII",
+  "usage_statement": "Official parent page states the dataset is free to use; publication must cite the precise dataset page and Feng et al. (2009).",
+  "scope": "Local academic research; no re-identification and no redistribution of raw data."
+}
